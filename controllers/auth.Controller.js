@@ -17,6 +17,20 @@ const login = async (req, res) => {
     }
 }
 
+const loginLawyer = async (req, res) => {
+    const lawyer = {
+        username: req.body.username,
+        password: req.body.password
+    }
+    const result = await authService.loginLawyer(lawyer);
+    if(!result){
+        res.status(401).send('Unauthorized');
+    }
+    else{
+        res.status(200).json(result);
+    }
+}
+
 const auth = async (req, res) => {
     try {
         const token = req.headers.authorization;
@@ -36,5 +50,6 @@ const auth = async (req, res) => {
 
 module.exports = {
     login,
+    loginLawyer,
     auth
 }
